@@ -3,7 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * This is my custom encryption program.
+ * This simple program allows users to encrypt and decrypt messages using
+ * a simple character shifting algorithm based on a private key.
  *
  * @author Jordy Pinos
  * @version 1.0
@@ -29,6 +30,13 @@ class Main {
     }
   }
 
+  /**
+   * Encrypts a given message using a simple character shifting algorithm
+   * based on a private key.
+   *
+   * @param message The message to be encrypted.
+   * @return The encrypted message.
+   */
   public static String encrypt(String message) {
     StringBuilder encryptedMessage = new StringBuilder();
 
@@ -46,6 +54,13 @@ class Main {
     return encryptedMessage.toString();
   }
 
+  /**
+   * Decrypts a given encrypted message using the same character shifting
+   * algorithm and private key used for encryption.
+   *
+   * @param encryptedMessage The message to be decrypted.
+   * @return The decrypted message.
+   */
   public static String decrypt(String encryptedMessage) {
     StringBuilder uncryptedMessage = new StringBuilder();
 
@@ -105,4 +120,3 @@ class Main {
     }
   }
 }
-
