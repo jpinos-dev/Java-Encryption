@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
  * @author Jordy Pinos
  * @version 1.0
  */
-class Main {
+class MessageEncryption {
 
   /// The private key used for encryption and decryption.
   private static final String PRIVATE_KEY = "SOL";
