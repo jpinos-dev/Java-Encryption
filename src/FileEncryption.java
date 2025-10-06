@@ -16,7 +16,7 @@ class FileEncryption {
     try (Scanner scanner = new Scanner(System.in)) {
       while (true) {
         printMenu();
-        System.out.print("Seleccione una opcion: ");
+        System.out.print("Select an option: ");
         option = Integer.parseInt(scanner.nextLine());
 
         handleMenuOptions(option, scanner, encryption);
@@ -27,35 +27,34 @@ class FileEncryption {
   private static void printMenu() {
     System.out.println("""
         |---------------------------------|
-        | Opcion 1: Cifrar                |
-        | Opcion 2: Descifrar             |
-        | Opcion 3: Salir                 |
+        | Option 1: Encrypt               |
+        | Option 2: Decryp                |
+        | Option 3: Quit                  |
         |---------------------------------|""");
   }
 
   private static void handleMenuOptions(int option, Scanner scanner, Encryption encryption) {
     switch (option) {
       case 1 -> {
-        System.out.print("Escriba la ruta del archivo a cifrar: ");
+        System.out.print("Write the path of the file to encrypt: ");
         String readPath = scanner.nextLine();
 
-        System.out.print("Escriba la ruta del archivo donde se va a guardar el cifrado: ");
+        System.out.print("Write the path of the file where the encrypted content will be saved: ");
         String writePath = scanner.nextLine();
 
-        System.out.println(readPath);
         encryption.encryptFile(Path.of(readPath), writePath);
       }
       case 2 -> {
-        System.out.print("Escriba la ruta del archivo a descifrar: ");
+        System.out.print("Write the path of the file to decrypt: ");
         String readPath = scanner.nextLine();
 
-        System.out.print("Escriba la ruta del archivo donde se va a guardar el descifrado: ");
+        System.out.print("Write the path of the file where the decrypted content will be saved: ");
         String writePath = scanner.nextLine();
 
         encryption.decryptFile(Path.of(readPath), writePath);
       }
       case 3 -> {
-        System.out.println("Saliendo...");
+        System.out.println("Exiting the program.");
         System.exit(0);
       }
     }

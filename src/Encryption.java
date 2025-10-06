@@ -45,8 +45,6 @@ class Encryption {
       e.printStackTrace();
       return;
     }
-
-    System.out.println("Encryption initialized successfully.");
   }
 
   /**
@@ -77,7 +75,6 @@ class Encryption {
 
     // 3. Encode the encrypted content to a string format (Base64)
     String encryptedContent = Base64.getEncoder().encodeToString(encodedContent);
-    System.out.println("Encrypted content: " + encryptedContent);
 
     // 4. Check if the output file exists, if not create it
     if (!createNewFile(writePath)) {
