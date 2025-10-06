@@ -35,7 +35,6 @@ class Encryption {
 
       // Initialize the cipher for encryption
       aesCipher = Cipher.getInstance("DES");
-      aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
     } catch (NoSuchAlgorithmException e) {
       System.out.println("No such algorithm.");
@@ -58,6 +57,7 @@ class Encryption {
    * @param writePath The path where the encrypted file will be saved.
    */
   public void encryptFile(Path readPath, String writePath) {
+
     // 1. Read the file to be encrypted
     byte[] fileContent = readFile(readPath);
 
@@ -67,6 +67,7 @@ class Encryption {
     // 2. Encrypt the file content
     byte[] encodedContent;
     try {
+      aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
       encodedContent = aesCipher.doFinal(fileContent);
     } catch (Exception e) {
       System.out.println("Error encrypting file.");
@@ -74,16 +75,16 @@ class Encryption {
       return;
     }
 
-    // Encrypt content
+    // 3. Encode the encrypted content to a string format (Base64)
     String encryptedContent = Base64.getEncoder().encodeToString(encodedContent);
     System.out.println("Encrypted content: " + encryptedContent);
 
-    // 3. Check if the output file exists, if not create it
+    // 4. Check if the output file exists, if not create it
     if (!createNewFile(writePath)) {
       return;
     }
 
-    // 4. Write the encrypted lines to the output file
+    // 5. Write the encrypted lines to the output file
     writeFile(writePath, encryptedContent);
   }
 
@@ -95,15 +96,17 @@ class Encryption {
    * @param writePath The path where the decrypted file will be saved.
    */
   public void decryptFile(Path readPath, String writePath) {
+
     // 1. Read the file to be decrypted
     byte[] fileContent = readFile(readPath);
 
     if (fileContent == null)
       return;
 
+    // 2. Decode the Base64 encoded content
     byte[] decodedContent = Base64.getDecoder().decode(fileContent);
 
-    // 2. Decrypt the file content
+    // 3. Decrypt the file content
     byte[] decryptedContent;
     try {
       aesCipher.init(Cipher.DECRYPT_MODE, secretKey);
@@ -114,12 +117,12 @@ class Encryption {
       return;
     }
 
-    // 3. Check if the output file exists, if not create it
+    // 4. Check if the output file exists, if not create it
     if (!createNewFile(writePath)) {
       return;
     }
 
-    // 4. Write the decrypted lines to the output file
+    // 5. Write the decrypted lines to the output file
     writeFile(writePath, new String(decryptedContent));
   }
 
