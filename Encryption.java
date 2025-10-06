@@ -12,7 +12,7 @@ import javax.crypto.SecretKey;
 import java.util.Base64;
 
 /**
- * This class provides methods to encrypt and decrypt files using AES
+ * This class provides methods to encrypt and decrypt files using DES
  * encryption.
  *
  * @author Jordy Pinos
@@ -25,16 +25,16 @@ class Encryption {
 
   /**
    * Constructor that initializes the encryption system by generating a secret key
-   * and setting up the AES cipher.
+   * and setting up the DES cipher.
    */
   public Encryption() {
     try {
-      // Generate a secret key for AES encryption
-      KeyGenerator keygen = KeyGenerator.getInstance("AES");
+      // Generate a secret key for DES encryption
+      KeyGenerator keygen = KeyGenerator.getInstance("DES");
       secretKey = keygen.generateKey();
 
       // Initialize the cipher for encryption
-      aesCipher = Cipher.getInstance("AES");
+      aesCipher = Cipher.getInstance("DES");
       aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
     } catch (NoSuchAlgorithmException e) {
