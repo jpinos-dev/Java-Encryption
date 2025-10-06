@@ -1,6 +1,5 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  * This simple program allows users to encrypt and decrypt messages using
@@ -21,12 +20,12 @@ class MessageEncryption {
   private static final int ASCII_START = 32;
 
   public static void main(String[] args) throws IOException {
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-    while (true) {
-      printMenu();
-      int option = Integer.parseInt(reader.readLine());
-      handleMenuOptions(option, reader);
+    try (Scanner scanner = new Scanner(System.in)) {
+      while (true) {
+        printMenu();
+        int option = Integer.parseInt(scanner.nextLine());
+        handleMenuOptions(option, scanner);
+      }
     }
   }
 
@@ -85,18 +84,18 @@ class MessageEncryption {
     System.out.print("Choose an option: ");
   }
 
-  private static void handleMenuOptions(int option, BufferedReader reader) throws IOException {
+  private static void handleMenuOptions(int option, Scanner scanner) throws IOException {
     switch (option) {
       case 1 -> {
         String message;
         System.out.print("Enter the message to encrypt: ");
-        message = reader.readLine();
+        message = scanner.nextLine();
         String encryptedMessage = encrypt(message);
 
         System.out.println("Encrypted Message: " + encryptedMessage);
 
         System.out.print("Do you want to decrypt it? (yes/no): ");
-        String response = reader.readLine();
+        String response = scanner.nextLine();
         if (response.equalsIgnoreCase("yes")) {
           String decryptedMessage = decrypt(encryptedMessage);
           System.out.println("Decrypted Message: " + decryptedMessage);
@@ -107,7 +106,7 @@ class MessageEncryption {
       case 2 -> {
         String encryptedMessage;
         System.out.print("Enter the message to decrypt: ");
-        encryptedMessage = reader.readLine();
+        encryptedMessage = scanner.nextLine();
         String decryptedMessage = decrypt(encryptedMessage);
 
         System.out.println("Decrypted Message: " + decryptedMessage);
